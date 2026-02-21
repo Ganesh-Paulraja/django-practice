@@ -1,0 +1,129 @@
+----opening-cmd---
+pip install virtualenv
+
+virtualenv myenv
+
+./myenv/Scripts/activate
+
+pip install django
+
+django-admin --version
+
+django-admin startproject myproject 
+
+cd myproject,  python manage.py runserver
+
+---starting app---
+python manage.py startapp myapp
+settings.py --> installed_apps --> add myapp
+INSTALLED_APPS = [
+    'django.contrib.staticfiles',
+    'myapp'
+]
+
+myproject --> urls.py --> path, --> path,include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),
+]
+
+create < urls.py > inside myapp
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('index/', views.index)
+]
+
+views.py
+from django.shortcuts import render
+# Create your views here.
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+http://127.0.0.1:8000/myapp/index/
+python manage.py runserver
+
+-------------html-----------------------
+mpyap --> templates 
+about.html --> default html with h1 inside About
+contact.html --> Contact
+home.html --> Home
+
+urls.py -->
+urlpatterns = [
+    path('index/', views.index),
+    path('home/', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+]
+
+views.py -->
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+def home(request):
+    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+http://127.0.0.1:8000/myapp/home/  or about, or contact
+
+call other urls in current file
+<div>
+    <a href="{% url 'contact' %}">contact</a>
+    <a href="{% url 'about' %}">about</a>
+</div>
+
+------------------dynamic values from view.py to home.html---------------------------
+views.py -->
+def home(request):
+    title = "Jclick Solution"
+    course = ['php', 'java', 'dotnet', 'python']
+    detail = {'name': 'Ajin', 'address': 'IN'}
+    return render(request, 'home.html', {'title': title, 'courses': course, 'details': detail})
+
+home.html -->
+<body>
+    <h1>Home</h1>
+    <h1>{{title}}</h1>
+    <!-- ---------------------------- -->
+    {% for data in courses %}
+    <ul>
+        <li>{{data}}</li>
+    </ul>
+    {% endfor %}
+    <!-- ---------------------------- -->
+    <h1>{{details.name}}, {{details.address}}</h1>
+    <!-- -----=------------------------------ -->
+    <div>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'about' %}">About</a>
+    </div>
+</body>
+-------------css, js, assert------------------
+myapp --> create - static -- css, js, images, videos --> put home.css, home.js, dummy img -- test all
+top of the html tag --> {% load static %}
+import css
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+-------------Layout.html -- common header and footer------------------
+
+
+-----------------------------------------
+db connection
+form.py
+models.py
+python manage.py makemigrations
+python manage.py migrate
+
+view.py
+url.py
+registor.html

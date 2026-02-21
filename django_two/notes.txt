@@ -1,0 +1,43 @@
+pip install virtualenv
+
+virtualenv myenv
+
+./myenv/Scripts/activate
+
+pip install django
+
+django-admin --version
+
+django-admin startproject myproject 
+
+cd myproject,  
+python manage.py runserver
+
+python manage.py startapp myapp
+settings.py --> installed_apps --> add myapp
+urls.py --> path, --> path,include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/'.include("myapp.urls"))
+]
+
+create urls.py inside myapp
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('index/', views.index)
+]
+
+views.py
+from django.shortcuts import render
+# Create your views here.
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+http://127.0.0.1:8000/myapp/index/
+python manage.py runserver
+

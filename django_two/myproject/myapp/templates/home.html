@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <H1>Home</H1>
+    <img src="{% static 'images/img.png'%}" alt="">
+    <h1>{{titles}}</h1>
+    {% for data in courses %}
+    <ul>
+        <li>{{data}}</li>
+    </ul>
+    {% endfor %}
+    <h1>{{details.name}}</h1>
+    <div>
+        <a href="{% url 'contact' %}">contact</a>
+        <a href="{% url 'about' %}">about</a> 
+        <!-- mslkjflasjfl -->
+    </div>
+</body>
+</html>
