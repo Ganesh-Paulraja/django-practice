@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<h1>HOME</h1>
+    <h1>{{title}}</h1>
+    <!-- ---------------------------- -->
+    {% for data in courses %}
+    <ul>
+        <li>{{data}}</li>
+    </ul>
+    {% endfor %}
+    <!-- ---------------------------- -->
+     <h1>{{details.name}}, {{details.address}}</h1>
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <h1>HOME</h1>
+    <h1>{{title}}</h1>
+    <!-- ---------------------------- -->
+    {% for data in courses %}
+    <ul>
+        <li>{{data}}</li>
+    </ul>
+    {% endfor %}
+    <!-- ---------------------------- -->
+     <h1>{{details.name}}, {{details.address}}</h1>
+    <ul>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <a href="mailto:ganeshsgk4@gmail.com">g@gmail.com</a>
+</body>
+</html>

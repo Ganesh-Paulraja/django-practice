@@ -1,0 +1,393 @@
+----opening-cmd---
+pip install virtualenv
+
+virtualenv myenv
+
+./myenv/Scripts/activate
+
+pip install django
+pip install djangorestframework -- api
+pip install django-cors-headers -- frontend
+
+django-admin --version
+
+django-admin startproject myproject 
+
+cd myproject, 
+** python manage.py runserver **
+check after -- ctrl + c
+---starting app---
+python manage.py startapp myapp
+myproject --> myproject -->  settings.py --> installed_apps --> add myapp
+INSTALLED_APPS = [
+    'django.contrib.staticfiles',
+    'myapp'
+]
+
+urls.py --> from django.urls import path,include --> adding include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),
+]
+
+create < urls.py > inside myapp
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('index/', views.index)
+]
+
+myapp --> views.py
+from django.shortcuts import render
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+http://127.0.0.1:8000/myapp/index/
+python manage.py runserver
+
+-------------html-----------------------
+mpyap --> templates 
+home.html --> Home
+about.html --> default html with h1 inside About
+contact.html --> Contact
+
+
+urls.py -->
+urlpatterns = [
+    path('index/', views.index),
+    path('home/', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+]
+
+views.py -->
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+def home(request):
+    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+http://127.0.0.1:8000/myapp/home/  or about, or contact
+
+call other urls in current file
+<div>
+    <a href="{% url 'contact' %}">contact</a>
+    <a href="{% url 'about' %}">about</a>
+</div>
+
+------------------dynamic values from view.py to home.html---------------------------
+views.py -->
+def home(request):
+    title = "Jclick Solution"
+    course = ['php', 'java', 'dotnet', 'python']
+    detail = {'name': 'Ajin', 'address': 'IN'}
+    return render(request, 'home.html', {'title': title, 'courses': course, 'details': detail})
+
+home.html -->
+<body>
+    <h1>Home</h1>
+    <h1>{{title}}</h1>
+    <!-- ---------------------------- -->
+    {% for data in courses %}
+    <ul>
+        <li>{{data}}</li>
+    </ul>
+    {% endfor %}
+    <!-- ---------------------------- -->
+    <h1>{{details.name}}, {{details.address}}</h1>
+    <!-- -----=------------------------------ -->
+    <div>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'about' %}">About</a>
+    </div>
+</body>
+-------------css, js, assert------------------
+myapp --> create - static -- css, js, images, videos --> put home.css, home.js, dummy img -- test all
+top of the html tag --> {% load static %}
+import css
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+-------------Layout.html -- common header and footer------------------
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header-wrap">
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'about' %}">About</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="footer-wrap">
+        @ 2026 ganesh dev
+    </footer>
+    {% block extra_js %} {% endblock %}
+</body>
+</html>
+--------home.html---------------------load static need everywhere----
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-wrap">
+    <h1>Home</h1>
+    <h1>{{ title }}</h1>
+
+    <img src="{% static 'images/jimiky.png' %}" alt="">
+
+    {% for data in courses %}
+        <ul>
+            <li>{{ data }}</li>
+        </ul>
+    {% endfor %}
+
+    <h1>{{ details.name }}, {{ details.address }}</h1>
+
+    <div>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'about' %}">About</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
+-----------------------------------------
+--------db connection-----------
+myapp --> models.py
+---------------------------------
+from django.db import models
+
+# Create your models here.
+
+class MyClass(models.Model):
+    name=models.CharField(max_length=100)
+    address=models.TextField()
+   
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+    def __str__(self):
+        return self.name
+
+-------------------------
+python manage.py makemigrations
+python manage.py migrate
+
+db created -- myapp_myclass
+--------------------------------
+
+myapp --> create --  form.py 
+
+from django import forms
+from .models import MyClass
+
+class MyForm(forms.ModelForm):
+    class Meta:
+        model = MyClass
+        fields = ['name', 'address', 'price'] # or '__all__
+
+--------------------
+
+-----INSERT DATA ------
+view.py
+
+from.forms import MyForm
+from .models import*
+---auto---
+
+def register(request):
+    if request.method == "POST":
+        form = MyForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+        return HttpResponse("Data sent successfully!")
+
+    else:
+        form = MyForm()   # create empty form for GET request
+
+        return render(request, 'register.html', {'form': form})
+    
+-----manual-----
+def insert(request):
+    if request.method == "POST":
+
+        name=request.POST['name']
+        address=request.POST['address']
+        price=request.POST['price']
+        data=MyClass.objects.create(name=name,address=address,price=price)
+        data.save()
+        return HttpResponse("Data sent successfully!")
+    else:
+        return render(request,'insert.html')
+
+
+----------------------------
+url.py
+path('register/', views.register, name='register'),
+path('insert/', views.insert, name='insert'),
+--------------------
+registor.html
+-----------------
+<body>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <!-- {{form.as_ul}}
+            {{form.as_table}} -->
+            <button type="submit">Submit</button>
+
+        </form>
+    
+</body>
+---------------------------
+---------show---------
+views.py
+
+def show(request):
+    data=MyClass.objects.all()
+    return render(request,'show.html',{'data':data})
+--------------------
+urls.py
+
+path('show/', views.show, name='show'),
+------------------
+show.html
+<body>
+     <table border="" width="50%"  cellspacing="0">
+        <thead bgcolor="green">
+        <tr  >
+            <th>name</th>
+            <th>Address</th>
+            <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for i in data  %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.price}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+---------------------
+---------Update -------
+views.py
+from django.shortcuts import render, redirect, get_object_or_404
+
+
+def item_update(request, id):
+    data = get_object_or_404(MyClass, id = id)
+    if request.method == "POST":
+        form = MyForm(request.POST, instance = data)
+        if form.is_valid():
+            form.save()
+            return redirect('show')
+    else:
+        form = MyForm(instance = data)
+        return render(request, 'update.html', {'form': form})
+-----------
+urls.py
+path('update/<int:id>', views.item_update, name='update'),
+-----------
+update.html 
+
+<body>
+    <main>
+        <form action="" method="post">
+           {% csrf_token %}
+            {{form.as_p}}
+            <button>update</button>
+        </form>
+    </main>
+</body>
+
+http://127.0.0.1:8000/myapp/update/1 -- id important
+-----------------------------
+-----------delete----------------
+views.py
+def item_delete(request, id):
+    data = get_object_or_404(MyClass, id = id)
+    if request.method == 'POST':
+        data.delete()
+        return redirect('show')
+    else:
+        return render(request, 'delete.html', {'data': data})
+------
+urls.py
+path('delete/<int:id>', views.item_delete, name='delete'),
+------
+delete.html
+<body>
+    <form action="" method="post">
+           {% csrf_token %}
+            {{form.as_p}}
+            <h1>confirm delete</h1>
+            <button>delete</button>
+        </form>
+</body>
+-------------------------------
+
+------
+
+-------
+todo.html
+<body>
+
+    <table border="" width="50%"  cellspacing="0">
+        <thead bgcolor="green">
+        <tr  >
+            <th>name</th>
+            <th>Address</th>
+            <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for i in data  %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.price}}</td>
+                <td><a href="{% url 'update' i.id %}" class="gg-update">update</a></td>
+                <td><a href="{% url 'delete' i.id %}" class="gg-update">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
