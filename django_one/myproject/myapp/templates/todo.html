@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table border="" width="50%"  cellspacing="0">
+        <thead bgcolor="green">
+        <tr  >
+            <th>name</th>
+            <th>Address</th>
+            <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for i in data  %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.price}}</td>
+                <td><a href="{% url 'update' i.id %}" class="gg-update">update</a></td>
+                <td><a href="{% url 'delete' i.id %}" class="gg-update">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+
+</html>

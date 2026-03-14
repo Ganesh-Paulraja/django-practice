@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-wrap">
+    <h1>Home</h1>
+    <h1>{{ title }}</h1>
+
+    <img src="{% static 'images/jimiky.png' %}" alt="">
+
+    {% for data in courses %}
+        <ul>
+            <li>{{ data }}</li>
+        </ul>
+    {% endfor %}
+
+    <h1>{{ details.name }}, {{ details.address }}</h1>
+
+    <div>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'about' %}">About</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
