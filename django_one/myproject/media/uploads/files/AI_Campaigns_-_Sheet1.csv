@@ -1,0 +1,234 @@
+Date,Campaign Short Description,Dynamic / Static,Device,Campaign Id,Prompt,% of AI Code,Developer
+09.03.2026,Series of images placed horizontal,Static,Desktop,56788276,"Remove the logos under the banner section and insert the following logos. Arrange them horizontally. Ensure they are displayed in a single line across all screen resolutions. All the images should have equal height.
+https://cdn.convertcart.com/uploads/ddf20542.png
+https://cdn.convertcart.com/uploads/0f9ed19c.png
+https://cdn.convertcart.com/uploads/90f1ea11.png
+https://cdn.convertcart.com/uploads/8ad97c95.png
+https://cdn.convertcart.com/uploads/e18bba3d.png",80,Munish
+09.03.2026,Series of images placed horizontal,Static,Mobile,29928714,"Remove the logos under the banner section and insert the following logos. Arrange them horizontally. Ensure they are displayed in a single line across all screen resolutions. All the images should have equal height.
+https://cdn.convertcart.com/uploads/ddf20542.png
+https://cdn.convertcart.com/uploads/0f9ed19c.png
+https://cdn.convertcart.com/uploads/90f1ea11.png
+https://cdn.convertcart.com/uploads/8ad97c95.png
+https://cdn.convertcart.com/uploads/e18bba3d.png",80,Munish
+10.03.2026,Comparision Table,Static,Desktop,74774688,"Task: Create a high-fidelity comparison table component using semantic HTML and SCSS (no variables).
+Layout Specifications:
+Background: The overall container should have a background color of #F9F9F9.
+Structure: A 3-column table: ""FEATURES"", ""REVRIDES"", and ""OTHER BRANDS"".
+Row Mapping: The features must be exactly:
+Customer Service & After-Sales Support
+Shipping & Delivery
+Product Quality & Build
+Performance & Power
+Durability & Strength
+Build Quality
+Visual Styling:
+Typography: Use color #404040 for feature text and ""OTHER BRANDS"". Use color #E21F26 for ""FEATURES"" and ""REVRIDES"".
+Highlighted Column: The ""REVRIDES"" column (center) must have a background color of #E21F260D. Apply a subtle rounded border (approx. 10px) to the top and bottom of this specific column to make it pop.
+Borders: Each row should have a border-bottom: 1px solid #40404033.
+Icons: >   * Use https://cdn.convertcart.com/uploads/d3877d30.svg for the REVRIDES column (green ticks).
+Use https://cdn.convertcart.com/uploads/5993dcdd.svg for the OTHER BRANDS column (X marks).
+Technical Requirements:
+Provide clean, semantic HTML.
+Provide SCSS without using variables.
+Ensure the icons are centered within their respective cells.",90,Munish
+10.03.2026,Comparision Table,Static,Mobile,83857582,"Insert an HTML comparison table above the section “Shop Parts & Accessories.”
+The section background color should be #F9F9F9, with a maximum width of 1010px.
+Table Structure: 
+The table should contain three columns with the following headers:
+FEATURES
+REVRIDES
+OTHER BRANDS
+Header Row Styling :
+Text color: #e21f26
+Font weight: Bold
+Font size: 24px
+Table Rows
+The table should contain 6 rows.
+Row text color: #404040
+Font size: 18px
+First Column Values:
+Customer Service & After-Sales Support
+Shipping & Delivery
+Product Quality & Build
+Performance & Power
+Durability & Strength
+Build Quality
+Second Column:
+Each cell should display the image:
+https://cdn.convertcart.com/uploads/f6faec09.png
+Background color (including the header):
+rgba(226, 31, 38, 0.05)
+The entire second column (including the header) should have:
+Rounded corner border
+Border color: rgba(226, 31, 38, 0.32)
+Border width: 1px
+Third Column:
+Each cell should display the image:
+https://cdn.convertcart.com/uploads/eb0090bb.png",90,Munish
+10.03.2026,Payment Seals,Static,Desktop,16061204,Request timed out. This site may be too large or slow to capture,0,Munish
+10.03.2026,Payment Seals,Static,Mobile,11212484,Request timed out. This site may be too large or slow to capture,0,Munish
+10.03.2026,,,,3598233,"Create an HTML section before the Description accordion.
+The section should contain five icons with their corresponding text.
+
+Icons
+https://cdn.convertcart.com/uploads/127e530a.png
+https://cdn.convertcart.com/uploads/66519c43.png
+https://cdn.convertcart.com/uploads/3839125f.png
+https://cdn.convertcart.com/uploads/4fa1eb84.png
+https://cdn.convertcart.com/uploads/cfa444e6.png
+
+Text for Each Icon
+Free Knocking* (Worth $50)
+30-Day Price Beat Guarantee*
+Free Shipping* ($200+ orders)
+Free 30 Day Return and Exchanges*
+Up To $100 Loyalty Bonus*
+
+Layout
+The first row should display the icons.
+The second row should display the corresponding text content for each icon.
+Display 3.5 icons within the viewport. Implement the Siema slider to allow sliding between icons, and enable drag functionality for user interaction.",80,Rathija
+10.03.2027,Horizontal accordion,Dynamic ,desktop,69586965,"
+Insert a horizontal accordion above the Description section.
+The first tab should be the Description tab.
+The title of the tab should be the text within the first h4 tag.
+The content of the tab should include the remaining content of the Description section.
+Use JavaScript to retrieve the title and content dynamically.
+
+The remaining accordion tabs should be taken from the accordion section located just above the Review section.
+The title of each accordion tab should be the text within the .zn-title class of the corresponding accordion.
+The content of each accordion tab should be the HTML within the corresponding accordion panel.
+The number of accordion tabs should be dynamic, based on the number of accordions available in that section.
+Use JavaScript to retrieve the titles and content from the accordion section.",80,Gopal
+10.03.2028,Horizontal accordion with slider ,Dynamic ,mobile,81110749,"Insert a horizontal accordion above the Description section.
+The first tab should be the Description tab.
+The title of the tab should be the text within the first h4 tag.
+The content of the tab should include the remaining content of the Description section.
+Use JavaScript to retrieve the title and content dynamically.
+
+The remaining accordion tabs should be taken from the accordion section located just above the Review section.
+The title of each accordion tab should be the text within the .zn-title class of the corresponding accordion.
+The content of each accordion tab should be the HTML within the corresponding accordion panel.
+The number of accordion tabs should be dynamic, based on the number of accordions available in that section.
+Use JavaScript to retrieve the titles and content from the accordion section.
+
+Also, add a tab title slider with left and right arrow navigation to preview the previous and next tabs.",80,Gopal
+10.03.2027,,,,4594145,"The Quantity section should be removed from its current position and placed to the left side of the Add to Cart button 
+
+The Quantity section width should be 25%. Also Remove the “Quantity” text displayed near the quantity field. Also remove the border/box around the quantity input field. The minus (-) and plus (+) buttons should have a background color of #F2F2F2.
+
+
+The Add to Cart button width should be 75%.
+
+There should be a 5px gap between the Quantity section and the Add to Cart button.
+
+Update the Add to Cart button styling as follows:
+
+Default State
+
+Background color: #FFFFFF
+
+Border: 1px solid #000000
+
+Cart icon color: #000000
+
+Text color: #000000
+
+When the product is added to the cart
+
+Button text should change to “Added!”
+
+Background color: #076324
+
+Text color: #FFFFFF
+
+Cart icon color: #FFFFFF",75,Rathija
+10.03.2027,SATC,,,10725916,"The Quantity section should be removed from its current position and placed to the left side of the Add to Cart button 
+
+The Quantity section width should be 25%. Also Remove the “Quantity” text displayed near the quantity field. Also remove the border/box around the quantity input field. The minus (-) and plus (+) buttons should have a background color of #F2F2F2.
+
+
+The Add to Cart button width should be 75%.
+
+There should be a 5px gap between the Quantity section and the Add to Cart button.
+
+Update the Add to Cart button styling as follows:
+
+Default State
+
+Background color: #FFFFFF
+
+Border: 1px solid #000000
+
+Cart icon color: #000000
+
+Text color: #000000
+
+When the product is added to the cart
+
+Button text should change to “Added!”
+
+Background color: #076324
+
+Text color: #FFFFFF
+
+Cart icon color: #FFFFFF",75,Rathija
+11.03.2027,Series of messages showing one by one in animation with infinte loop,Static,Desktop,64642707,"Create an HTML, CSS, and JavaScript component that will appear above the Add to Cart CTA.
+Functional Requirements
+Display 3 different shipping messages.
+Only one message should be visible at a time.
+The messages should rotate automatically every 5 seconds in a loop.
+The section must remain the same size while messages change.
+Messages and Icons
+Each message should contain an icon on the left and text on the right.
+Icon: https://cdn.convertcart.com/uploads/3b220fb0.svg
+Text: Orders shipped in the next 1–2 working days
+Icon: https://cdn.convertcart.com/uploads/a22b836b.svg
+Text: All US orders shipped from our New York warehouse
+Icon: https://cdn.convertcart.com/uploads/ebbf1224.svg
+Text: All CAD orders shipped from our Montreal warehouse
+Design Requirements
+Text color: #333333
+Section background color: #2F71B514
+Content should be center aligned horizontally
+Icon and text should be vertically centered
+Add comfortable padding on all sides of the text
+Ensure the component is responsive for mobile and desktop
+Animation Behavior
+Messages should fade or slide smoothly when switching.
+Change message every 5 seconds automatically.
+The animation should loop infinitely.
+Code Requirements
+Provide clean HTML structure
+Use CSS for styling
+Use JavaScript for rotating the messages",80,Munish
+11.03.2027,Series of messages showing one by one in animation with infinte loop,Static,Mobile,76641818,"""Create an HTML, CSS, and JavaScript component that will appear above the Add to Cart CTA.
+Functional Requirements
+Display 3 different shipping messages.
+Only one message should be visible at a time.
+The messages should rotate automatically every 5 seconds in a loop.
+The section must remain the same size while messages change.
+Messages and Icons
+Each message should contain an icon on the left and text on the right.
+Icon: https://cdn.convertcart.com/uploads/3b220fb0.svg
+Text: Orders shipped in the next 1–2 working days
+Icon: https://cdn.convertcart.com/uploads/a22b836b.svg
+Text: All US orders shipped from our New York warehouse
+Icon: https://cdn.convertcart.com/uploads/ebbf1224.svg
+Text: All CAD orders shipped from our Montreal warehouse
+Design Requirements
+Text color: #333333
+Section background color: #2F71B514
+Content should be center aligned horizontally
+Icon and text should be vertically centered
+Add comfortable padding on all sides of the text
+Ensure the component is responsive for mobile and desktop
+Animation Behavior
+Messages should fade or slide smoothly when switching.
+Change message every 5 seconds automatically.
+The animation should loop infinitely.
+Code Requirements
+Provide clean HTML structure
+Use CSS for styling
+Use JavaScript for rotating the messages""",80,Munish

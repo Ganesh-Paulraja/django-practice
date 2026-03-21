@@ -505,6 +505,7 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 pip install pillow -- for show images
+python -m pip install Pillow
     create model
     python manage.py makemigrations
    python manage.py migrate

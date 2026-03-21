@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+    {% for file in files %}
+    <li>
+        <strong>{{ file.name }}</strong><br>
+
+        <a href="{{ file.file.url }}" download>
+            Download File
+        </a>
+        <br><br>
+
+        <img src="{{ file.image.url }}" alt="{{ file.name }}" width="200" height="200">
+    </li>
+    {% endfor %}
+</ul>
+</div>
+</body>
+</html>

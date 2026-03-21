@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from .forms import MyForm
+from .forms import MyForm, UploadForm
 from .models import*
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
@@ -65,7 +65,7 @@ def sign_in(request):
     if request.method == "POST":
         username = request.POST.get('name')
         password = request.POST.get('password')
-        data = User.objects.create(username=username, password=password)
+        data = User.objects.create_user(username=username, password=password)
         data.save()
         return HttpResponse("Data Send Successfully")
     else: 
@@ -80,6 +80,24 @@ def login_view(request):
       if data is not None:
         login(request, data)
         messages.success(request, "Login Successfully")
-        return redirect('login')
+        return redirect('login_reg')
     else:
         return render(request, 'login_reg.html')
+
+
+def upload_file(request):
+    if request.method == "POST":
+        form = UploadForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            form.save()
+        return HttpResponse("Data sent successfully!")
+
+    else:
+        form = UploadForm()   # create empty form for GET request
+
+        return render(request, 'upload.html', {'form': form})
+    
+def show_files(request):
+    files= upload.objects.all()
+    return render(request,'file_show.html',{'files':files})
