@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!035il4j)4wv!=p&h=u$sowhx1_!hj&fxl&k@km1ngc0-$kqmq'
+SECRET_KEY = 'django-insecure-xpl%ac1earr_&hcay&f*0=n!mixptxa(icl#6abuvdlj9@(nzh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp'
+    'myapp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +122,3 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ganeshsgk4@gmail.com' # ENTER YOUR EMAIL
-EMAIL_HOST_PASSWORD = 'wtxedxotbrfjrwbp' # REPLACE WITH YOUR PASSWORD

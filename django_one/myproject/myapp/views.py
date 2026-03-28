@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
+#import for send mails
+from django.core.mail import send_mail
+
 def index(request):
     return HttpResponse("welcome to my page !")
 
@@ -101,3 +104,35 @@ def upload_file(request):
 def show_files(request):
     files= upload.objects.all()
     return render(request,'file_show.html',{'files':files})
+
+def send_email_view(request):
+    if request.method == "POST":
+        #get data from the form
+        username = request.POST.get('name')
+        subject = request.POST.get('subject')
+        messages = request.POST.get('message')
+        recipient = request.POST.get('recipient')
+        try:
+            send_mail(
+                subject= subject,
+                message= messages,
+                from_email="ganeshsgk4@gmail.com",
+                recipient_list=['ganeshsgk4@gamil.com'],
+                fail_silently= False,
+            )
+            send_mail(
+                subject=f"hi {username} thanks for visit my website",
+                message= messages,
+                #from _email = "your_eamil@gmail.com",
+                from_email="ganeshsgk4@gmail.com", # Replace with your email
+                #Replace with your email
+                recipient_list=[recipient],
+                #fail_silently=False,
+            )
+            return HttpResponse("Email sent successfully!")
+        except Exception as e:
+            return HttpResponse(f"Failed to send email: {e}")
+        
+    
+    return render(request, 'mail_me.html')
+

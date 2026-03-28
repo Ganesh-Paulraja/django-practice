@@ -513,3 +513,21 @@ upload.html
 
 myapp --> views.py
 url.py
+--------------------------Mail sending------------------------------------
+https://support.google.com/accounts/answer/185833?hl=en --> create and mange app password
+wtxedxotbrfjrwbp
+create mail_me.html
+
+settings.py ---> at the end
+ 
+EMAIL_BACKEND = 'djaongo.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ganeshsgk4@gmail.com' # ENTER YOUR EMAIL
+EMAIL_HOST_PASSWORD = 'wtxedxotbrfjrwbp' # REPLACE WITH YOUR PASSWORD
+
+views.py
+from django.core.mail import send_mail
+
+

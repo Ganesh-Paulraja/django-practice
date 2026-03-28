@@ -14,4 +14,5 @@ urlpatterns = [
     path('login_reg/', views.login_view, name="login_reg"),
     path('file/', views.upload_file, name='file' ),
     path('file_show/', views.show_files, name='file_show'),
+    path('email/', views.send_email_view, name='email'),
 ]

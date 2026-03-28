@@ -1,0 +1,77 @@
+----opening-cmd---
+pip install virtualenv
+
+virtualenv myenv
+
+./myenv/Scripts/activate
+
+pip install django
+pip install djangorestframework -- api
+pip install django-cors-headers -- frontend
+
+django-admin --version
+
+django-admin startproject myproject 
+
+cd myproject, 
+** python manage.py runserver **
+check after -- ctrl + c
+---starting app---
+python manage.py startapp myapp
+myproject --> myproject -->  settings.py --> installed_apps --> add myapp
+INSTALLED_APPS = [
+    'django.contrib.staticfiles',
+    'myapp',
+    'rest _framework',
+]
+
+urls.py --> from django.urls import path,include --> adding include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),
+]
+
+-------------
+create < urls.py > inside myapp
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('index/', views.index)
+]
+
+myapp --> views.py
+from django.shortcuts import render
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+http://127.0.0.1:8000/myapp/index/
+python manage.py runserver
+
+-------------------------------------
+
+model.py
+from django.db import models
+
+# Create your models here.
+
+class MyClass(models.Model):
+    name=models.CharField(max_length=100)
+    address=models.TextField()
+   
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+    def __str__(self):
+        return self.name
+
+
+python manage.py makemigrations
+python manage.py migrate
+    
+-----------------------------------
+insteead of forms.py use serializers.py
+ create serializers.py
