@@ -1,0 +1,142 @@
+----opening-cmd---
+pip install virtualenv
+
+virtualenv myenv
+
+./myenv/Scripts/activate
+
+pip install django
+pip install djangorestframework -- api
+pip install django-cors-headers -- frontend
+
+django-admin --version
+
+django-admin startproject myproject 
+
+cd myproject, 
+** python manage.py runserver **
+check after -- ctrl + c
+---starting app---
+python manage.py startapp myapp
+myproject --> myproject -->  settings.py --> installed_apps --> add myapp
+INSTALLED_APPS = [
+    'django.contrib.staticfiles',
+    'myapp',
+    'rest_framework',
+]
+
+settings.py + urls.py --> 
+from django.urls import path,include --> adding include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),
+]
+
+-------------
+create < urls.py > inside myapp
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('index/', views.index)
+]
+
+myapp --> views.py
+from django.shortcuts import render
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("welcome to my page !")
+
+http://127.0.0.1:8000/myapp/index/
+python manage.py runserver
+
+-------------------------------------
+myproject --> settings.py -- last
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+myproject --> urls.py
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+pip install pillow -- for show images
+python -m pip install Pillow
+
+---------------------------------
+
+model.py
+from django.db import models
+
+class Upload(models.Model):
+    name = models.CharField(max_length=100)
+    file = models.FileField(upload_to='uploads/files') #for general files
+    image = models.ImageField(upload_to = 'uploads/images') #For images
+
+    def __str__(self):
+        return self.name
+
+
+python manage.py makemigrations
+python manage.py migrate
+    
+-----------------------------------
+insteead of forms.py use serializers.py
+ create serializers.py
+------
+from rest_framework import serializers
+
+from .models import Upload
+
+class DataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Upload   # must match
+        fields = '__all__'
+
+-----------------------------------------
+views.py
+
+
+from rest_framework.decorators import api_view
+from .serializers import DataSerializer
+from .models import Upload
+from rest_framework.response import Response
+from rest_framework import status
+
+
+@api_view(['GET', 'POST'])
+
+def data_list(requiest):
+    if requiest.method=="GET":
+        list = Upload.objects.all()
+        serializer = DataSerializer(list, many = True)
+        return Response(serializer.data)
+    
+    if requiest.method == 'POST':
+        serializer = DataSerializer(data = requiest.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.error, status = status.HTTP_400_BAD_REQUEST)
+
+-----------------------------
+urls.py
+
+urlpatterns = [
+    # path('index/', views.index),
+    path('apilist/', views.data_list, name='list'),
+]
+
+http://127.0.0.1:8000/media/uploads/images/Frame_52.png
+
+------------------
